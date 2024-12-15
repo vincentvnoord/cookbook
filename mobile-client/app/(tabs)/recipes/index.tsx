@@ -20,7 +20,7 @@ export default function RecipeListScreen() {
       <Animated.ScrollView>
         <ThemedView className='flex flex-col gap-4'>
           <View className='flex flex-col gap-3'>
-            <RecipePreview recipe={{ title: 'Heerlijke lasagne', ingredients: [], instructions: [], url: "bestrecipes.com" }} />
+            <RecipePreview recipe={{ title: 'Easy Homemade Lasagna', ingredients: [], instructions: [], url: "bestrecipes.com" }} />
             <RecipePreview recipe={{ title: 'Heerlijke lasagne', ingredients: [], instructions: [], url: "bestrecipes.com" }} />
             <RecipePreview recipe={{ title: 'Heerlijke lasagne', ingredients: [], instructions: [], url: "bestrecipes.com" }} />
             <RecipePreview recipe={{ title: 'Heerlijke lasagne', ingredients: [], instructions: [], url: "bestrecipes.com" }} />
@@ -46,11 +46,13 @@ export default function RecipeListScreen() {
 }
 
 const RecipePreview = ({ recipe }: { recipe: Recipe }) => {
+  const imgSource = 'https://bakerbynature.com/wp-content/uploads/2020/07/The-Best-Homemade-Lasagna-Recipe-54432111123456789-1-of-1-500x500.jpg';
+
   return (
-    <Link href={{ pathname: `/recipes/[id]`, params: { id: 'test' } }}>
+    <Link href={`/recipes/${"temp_ID"}?title=${recipe.title}&image=${imgSource}`}>
       <ThemedView className='flex flex-row items-center gap-3'>
         <View className='w-16 rounded-lg h-16 bg-gray-200 overflow-hidden justify-center items-center relative'>
-          <Image className='object-cover w-full h-full' source={require('@/assets/images/lasagna.jpg')} />
+          <Image className='object-cover w-full h-full' source={{ uri: imgSource }} />
         </View>
         <ThemedView className='flex-grow'>
           <Text className="text-lg">{recipe.title}</Text>
