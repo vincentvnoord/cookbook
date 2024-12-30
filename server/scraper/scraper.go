@@ -10,10 +10,8 @@ import (
 
 type Recipe struct {
 	Name         string   `json:"name"`
-	Ingredients  []string `json:"recipeIngredient"`
-	Instructions []struct {
-		Text string `json:"text"`
-	} `json:"recipeInstructions"`
+	Ingredients  []string `json:"ingredients"`
+	Instructions []string `json:"instructions"`
 }
 
 func toStringSlice(input interface{}) []string {
@@ -89,12 +87,12 @@ func ScrapeRecipe(url string) (*Recipe, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	
 	// Display the extracted recipe details
 	fmt.Println("Recipe Name:", recipe.Name)
 	fmt.Println("Ingredients:", recipe.Ingredients)
 	for _, instruction := range recipe.Instructions {
-		fmt.Println("Instruction:", instruction.Text)
+		fmt.Println("Instruction:", instruction)
 	}
 
 	return &recipe, nil
@@ -115,9 +113,7 @@ func processRecipe(data map[string]interface{}, recipe *Recipe, foundRecipe *boo
 			for _, instruction := range instructions {
 				if step, ok := instruction.(map[string]interface{}); ok {
 					if text, exists := step["text"].(string); exists {
-						recipe.Instructions = append(recipe.Instructions, struct {
-							Text string `json:"text"`
-						}{Text: text})
+						recipe.Instructions = append(recipe.Instructions, text)
 					}
 				}
 			}

@@ -1,8 +1,9 @@
 export type TRecipe = {
-    url?: string;
-    title: string;
+    id: string;
+    name: string;
     ingredients: string[];
-    instructions: TRecipeInstruction[];
+    instructions: string[];
+    url?: string;
 }
 
 export type TRecipeInstruction = {
