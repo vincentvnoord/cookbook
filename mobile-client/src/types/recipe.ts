@@ -3,6 +3,7 @@ export type TRecipe = {
     name: string;
     ingredients: string[];
     instructions: string[];
+    image?: string;
     url?: string;
 }
 

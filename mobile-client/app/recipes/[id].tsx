@@ -9,14 +9,14 @@ import { EditableElement } from "./_components/EditableElement";
 import React from "react";
 
 export default function RecipeScreen() {
-    const { id, title, image } = useLocalSearchParams();
+    const { id, name, image } = useLocalSearchParams();
     const navigation = useNavigation();
 
     const [recipe, setRecipe] = useState<Recipe | null>(null);
 
     useEffect(() => {
         navigation.setOptions({
-            title: title,
+            title: name,
         })
 
         const getDetails = async () => {
@@ -31,7 +31,7 @@ export default function RecipeScreen() {
         <Animated.ScrollView>
             <View className="flex-1 pb-32 bg-white">
                 <View className="w-full max-h-48 bg-slate-300 justify-center items-center rounded-b-3xl shadow-lg shadow-black overflow-hidden">
-                    <Image className="object-cover w-full h-full" source={typeof image === 'string' ? { uri: image } : undefined} />
+                    {image && <Image className="object-cover w-full h-full" source={typeof image === 'string' ? { uri: image } : undefined} />}
                 </View>
                 <View className="p-6 flex-grow flex flex-col gap-4">
                     <View className="flex justify-between items-center flex-row w-full gap-4">
@@ -56,9 +56,9 @@ export default function RecipeScreen() {
                     </View>
 
                     <View className="flex flex-grow w-full gap-2">
-                        <Text className="text-xl font-semibold">Directions</Text>
+                        <Text className="text-xl font-semibold">Instructions</Text>
                         <View className="flex flex-grow flex-col">
-                            {recipe?.instructions.map((step, index) => <InstructionStep key={index} index={index + 1} step={step} />)}
+                            {recipe?.instructions?.map((step, index) => <InstructionStep key={index} index={index + 1} step={step} />)}
                         </View>
                     </View>
                 </View>

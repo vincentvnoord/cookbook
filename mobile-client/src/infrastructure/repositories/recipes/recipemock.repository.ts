@@ -49,6 +49,7 @@ export class RecipeRepositoryMock implements IRecipeRepository {
             name: recipe.name,
             ingredients: recipe.ingredients,
             instructions: recipe.instructions,
+            image: recipe.image,
         };
     }
 

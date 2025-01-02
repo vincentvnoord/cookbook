@@ -12,6 +12,7 @@ type Recipe struct {
 	Name         string   `json:"name"`
 	Ingredients  []string `json:"ingredients"`
 	Instructions []string `json:"instructions"`
+	Image        *string  `json:"image"`
 }
 
 func toStringSlice(input interface{}) []string {
@@ -87,7 +88,7 @@ func ScrapeRecipe(url string) (*Recipe, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	// Display the extracted recipe details
 	fmt.Println("Recipe Name:", recipe.Name)
 	fmt.Println("Ingredients:", recipe.Ingredients)
@@ -108,8 +109,24 @@ func processRecipe(data map[string]interface{}, recipe *Recipe, foundRecipe *boo
 		recipe.Name = data["name"].(string)
 		recipe.Ingredients = toStringSlice(data["recipeIngredient"])
 
+		if image, ok := data["image"].(string); ok {
+			recipe.Image = &image
+		} else if images, ok := data["image"].([]interface{}); ok && len(images) > 0 {
+			if imageURL, ok := images[0].(string); ok {
+				recipe.Image = &imageURL
+			}
+		}
+
 		// Handle recipe instructions
 		if instructions, ok := data["recipeInstructions"].([]interface{}); ok {
+			for _, instruction := range instructions {
+				if step, ok := instruction.(map[string]interface{}); ok {
+					if text, exists := step["text"].(string); exists {
+						recipe.Instructions = append(recipe.Instructions, text)
+					}
+				}
+			}
+		} else if instructions, ok := data["instructions"].([]interface{}); ok {
 			for _, instruction := range instructions {
 				if step, ok := instruction.(map[string]interface{}); ok {
 					if text, exists := step["text"].(string); exists {

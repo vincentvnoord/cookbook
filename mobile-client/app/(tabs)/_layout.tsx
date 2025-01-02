@@ -34,13 +34,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <House size={28} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="recipes/index"
-        options={{
-          title: 'Cookbook',
-          tabBarIcon: ({ color }) => <Book size={28} color={color} />,
-        }}
-      />
     </Tabs>
   );
 }

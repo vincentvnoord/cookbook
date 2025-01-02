@@ -3,7 +3,7 @@ import { getRecipeDetailsUseCase } from "@/src/application/use-cases/recipes/get
 function presenter(recipe: Recipe) {
     return {
         id: recipe.id,
-        title: recipe.name,
+        name: recipe.name,
         ingredients: recipe.ingredients,
         instructions: recipe.instructions,
         url: recipe.url

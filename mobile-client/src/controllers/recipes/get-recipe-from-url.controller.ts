@@ -5,6 +5,7 @@ function presenter(recipe: Recipe) {
         name: recipe.name,
         ingredients: recipe.ingredients,
         instructions: recipe.instructions,
+        image: recipe.image,
     }
 }
 
