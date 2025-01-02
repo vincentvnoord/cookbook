@@ -2,11 +2,11 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { HapticTab } from '@/src/components/HapticTab';
+import { IconSymbol } from '@/src/components/ui/IconSymbol';
+import TabBarBackground from '@/src/components/ui/TabBarBackground';
+import { Colors } from '@/src/constants/Colors';
+import { useColorScheme } from '@/src/hooks/useColorScheme';
 import { Book, HomeIcon, House, HouseIcon } from 'lucide-react-native';
 
 export default function TabLayout() {
@@ -32,13 +32,6 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <House size={28} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="recipes/index"
-        options={{
-          title: 'Cookbook',
-          tabBarIcon: ({ color }) => <Book size={28} color={color} />,
         }}
       />
     </Tabs>
